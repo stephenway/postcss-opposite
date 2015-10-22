@@ -1,0 +1,29 @@
+{
+  "name": "postcss-opposite-position",
+  "version": "0.0.4",
+  "description": "PostCSS plugin to return opposite position of the given position.",
+  "main": "index.js",
+  "keywords": [
+    "css",
+    "postcss",
+    "postcss-plugin"
+  ],
+  "author": "Stephen Way <stephen@stephenway.net> (stephenway.net)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:stephenway/postcss-opposite-position.git"
+  },
+  "dependencies": {
+    "postcss": "^5.0.10"
+  },
+  "devDependencies": {
+    "jscs": "^1.6.2",
+    "jshint": "^2.5.6",
+    "tape": "^4.2.1"
+  },
+  "scripts": {
+    "lint": "jscs *.js **/*.js && jshint . --exclude-path .gitignore",
+    "test": "npm run lint && tape test"
+  }
+}
