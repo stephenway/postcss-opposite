@@ -1,4 +1,6 @@
 body {
+  direction: rtl;
   float: right;
+  text-align: center;
 }
 

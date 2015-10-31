@@ -1,6 +1,8 @@
 $direction: left;
 
 body {
+  direction: opposite(ltr);
   float: opposite($direction);
+  text-align: opposite(center);
 }
 
