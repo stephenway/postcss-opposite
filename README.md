@@ -1,5 +1,7 @@
 # postcss-opposite [![Travis Build Status][travis-img]][travis]
 
+`opposite()` transforms `top` and `bottom`, `right` and `left`, `center`, `ltr` and `rtl`.
+
 ## Install
 
 ``` shell
@@ -27,8 +29,13 @@ var output = postcss()
 ### PostCSS
 ```css
 /* input.css */
+$direction: opposite(left);
 
 body {
+  direction: opposite(ltr);
+  float: $direction;
+  margin-$(direction): 1em;
+  text-align: opposite(center);
 }
 ```
 
@@ -37,6 +44,10 @@ body {
 /* output.css */
 
 body {
+  direction: rtl;
+  float: right;
+  margin-right: 1em;
+  test-align: center;
 }
 ```
 

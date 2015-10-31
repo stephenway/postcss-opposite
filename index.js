@@ -10,21 +10,21 @@ var postcss = require('postcss');
 module.exports = postcss.plugin('postcss-opposite', function(opts) {
   opts = opts || {};
 
+  function unquote(str, quoteChar) {
+    quoteChar = quoteChar || '"';
+    if (str[0] === quoteChar && str[str.length - 1] === quoteChar) {
+      return str.slice(1, str.length - 1);
+    }
+    else {
+      return str;
+    }
+  }
+
   return function(css) {
     css.walkDecls(function(decl) {
       if (!decl.value || decl.value.indexOf('opposite(') === -1) {
         return;
       }
-      function unquote(str, quoteChar) {
-        quoteChar = quoteChar || '"';
-        if (str[0] === quoteChar && str[str.length - 1] === quoteChar) {
-          return str.slice(1, str.length - 1);
-        }
-        else {
-          return str;
-        }
-      }
-
       var index = decl.value.indexOf('(');
       var last = decl.value.indexOf(')');
       var directions = decl.value.slice(++index, last);
