@@ -1,0 +1,6 @@
+$direction: left;
+
+body {
+  padding-$(direction): 10px;
+}
+

@@ -1,7 +1,6 @@
+$direction: left;
+
 body {
-  padding-$(opposite-position(top)): none;
-  float: opposite-position(right);
-  padding-$(opposite-position(bottom)): none;
-  float: opposite-position(left);
+  float: opposite($direction);
 }
 

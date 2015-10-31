@@ -1,9 +1,9 @@
-# postcss-opposite-position [![Travis Build Status][travis-img]][travis]
+# postcss-opposite [![Travis Build Status][travis-img]][travis]
 
 ## Install
 
 ``` shell
-npm i --save-dev postcss-opposite-position
+npm i --save-dev postcss-opposite
 ```
 
 ## Usage
@@ -12,13 +12,13 @@ npm i --save-dev postcss-opposite-position
 var fs = require('fs');
 var postcss = require('postcss');
 var customProperties = require('postcss-custom-properties');
-var opposite-position = require('postcss-opposite-position');
+var opposite = require('postcss-opposite');
 
 var css = fs.readFileSync('input.css', 'utf8');
 
 var output = postcss()
   .use(customProperties())
-  .use(opposite-position())
+  .use(opposite())
   .process(css)
   .css;
 
@@ -45,7 +45,7 @@ body {
 Make a branch, `npm test` often, submit a new pull when it passes.
 
 ``` shell
-git clone https://github.com/stephenway/postcss-opposite-position.git
+git clone https://github.com/stephenway/postcss-opposite.git
 git checkout -b patch-1
 npm i
 npm test
@@ -54,8 +54,8 @@ npm test
 ## Resources
 
 * [License](LICENSE)
-* [Releases](https://github.com/stephenway/postcss-opposite-position/releases)
+* [Releases](https://github.com/stephenway/postcss-opposite/releases)
 * [Plugin Guidelines](https://github.com/postcss/postcss/blob/master/docs/guidelines/plugin.md)
 
-[travis-img]: https://img.shields.io/travis/stephenway/postcss-opposite-position.svg?label=unix
-[travis]: https://travis-ci.org/stephenway/postcss-opposite-position
+[travis-img]: https://img.shields.io/travis/stephenway/postcss-opposite.svg?label=unix
+[travis]: https://travis-ci.org/stephenway/postcss-opposite

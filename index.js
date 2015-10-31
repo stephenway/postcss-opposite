@@ -1,3 +1,5 @@
+// jscs:disable validateQuoteMarks
+
 'use strict';
 
 var postcss = require('postcss');
@@ -5,55 +7,51 @@ var postcss = require('postcss');
 /**
  * PostCSS plugin to transform opposite-position()
  */
-module.exports = postcss.plugin('postcss-opposite-position', function(opts) {
+module.exports = postcss.plugin('postcss-opposite', function(opts) {
   opts = opts || {};
 
   return function(css) {
     css.walkDecls(function(decl) {
-      if (!decl.value || decl.value.indexOf('opposite-position(') === -1) {
+      if (!decl.value || decl.value.indexOf('opposite(') === -1) {
         return;
+      }
+      function unquote(str, quoteChar) {
+        quoteChar = quoteChar || '"';
+        if (str[0] === quoteChar && str[str.length - 1] === quoteChar) {
+          return str.slice(1, str.length - 1);
+        }
+        else {
+          return str;
+        }
       }
 
       var index = decl.value.indexOf('(');
       var last = decl.value.indexOf(')');
-      var value = decl.value.slice(++index, last);
-      var position;
+      var directions = decl.value.slice(++index, last);
+      var oppositeDirections;
+      var oppositeDirectionsF;
+      var directionMap = new Map();
+      directionMap.set('top', 'bottom');
+      directionMap.set('right', 'left');
+      directionMap.set('bottom', 'top');
+      directionMap.set('left', 'right');
+      directionMap.set('center', 'center');
+      directionMap.set('ltr', 'rtl');
+      directionMap.set('rtl', 'ltr');
 
       return new Promise(function(resolve) {
-        if (value === 'top') {
-          position = 'bottom';
+        for (var direction in directions) {
+          var directionL = direction.toLowerCase();
+
+          if (directionMap.has(directionL)) {
+            oppositeDirectionsF = oppositeDirections.appendChild(unquote(directionMap.get(directionL), "'"));
+          }
+          else {
+            console.log('No opposite direction can be found for $(direction). Direction omitted.');
+          }
         }
-        else if (value === 'right') {
-          position = 'left';
-        }
-        else if (value === 'bottom') {
-          position = 'top';
-        }
-        else if (value === 'left') {
-          position = 'right';
-        }
-        else if (value === 'center') {
-          position = 'center';
-        }
-        else if (value === 'top left') {
-          position = 'bottom right';
-        }
-        else if (value === 'top right') {
-          position = 'bottom left';
-        }
-        else if (value === 'center right') {
-          position = 'center left';
-        }
-        else if (value === 'center left') {
-          position = 'center right';
-        }
-        else if (value === 'bottom right') {
-          position = 'top left';
-        }
-        else if (value === 'bottom left') {
-          position = 'top right';
-        }
-        decl.value = position;
+
+        decl.value = oppositeDirectionsF;
         resolve();
       });
     });
